@@ -23,11 +23,16 @@ show error
 
 begin
   -- Repository name is unique, See index S_REPOSITORY_U1
-  SELECT row_id INTO :vc_repository_id FROM S_REPOSITORY WHERE name = :vc_repository_name ;
+  SELECT row_id INTO :vc_repository_id FROM S_REPOSITORY 
+  WHERE name = :vc_repository_name ;
+  
   -- BC name is unique in a repository, See index S_BUSCOMP_U1
-  SELECT row_id INTO :vc_bc_id FROM S_BUSCOMP WHERE name = :vc_bc_name AND repository_id = :vc_repository_id ;
+  SELECT row_id INTO :vc_bc_id FROM S_BUSCOMP 
+  WHERE name = :vc_bc_name AND repository_id = :vc_repository_id ;
+  
   -- Field name is unique in a BC id, See index S_FIELD_U1
-  SELECT row_id INTO :vc_field_id FROM S_FIELD WHERE name = :vc_field_name AND buscomp_id = :vc_bc_id AND repository_id = :vc_repository_id ;
+  SELECT row_id INTO :vc_field_id FROM S_FIELD 
+  WHERE name = :vc_field_name AND buscomp_id = :vc_bc_id AND repository_id = :vc_repository_id ;
 end ;
 /
 show error
