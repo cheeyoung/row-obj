@@ -13,8 +13,8 @@ variable vc_repository_id VARCHAR2(15) ;
 
 -- input
 begin
-  :vc_field_name := 'Street Address 2' ;
-  :vc_field_name := 'Employee Id' ;
+  :vc_field_name := 'STW Global Name' ;
+--  :vc_field_name := 'Employee Id' ;
   :vc_bc_name := 'Account' ;
   :vc_repository_name := 'Siebel Repository' ;
 end ;
@@ -55,7 +55,7 @@ WHERE f.row_id = :vc_field_id
 /
 
 set long 2000
-SELECT f.
+SELECT f.row_id
 , f.col_name
 , f.join_name
 , f.comments
