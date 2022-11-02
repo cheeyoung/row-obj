@@ -1,7 +1,7 @@
 --
 -- 31 Oct 2022 Cheeyoung O
 -- Created to List BC Fields and Table columns
--- with Symbol Strings on a Form Applet (Siebel 8.1.1, Oracle 11.2)
+-- with Symbol Strings in a Form Applet (Siebel 8.1.1, Oracle 11.2)
 -- This SQL scripts only works for Form Applet
 -- as different SQL statements is needed for List Applet
 -- Set NLS_LANG=AMERICAN_AMERICA.AL32UTF8 before running SQL*Plus
@@ -62,10 +62,9 @@ set markup csv on delimiter ',' quote on
 show user
 print :vc_applet_name :vc_bc_name :vc_bc_tab_name
 
-spool cap_form_applet.csv
-SELECT NULL AS "Sf Object"
-, NULL AS "Field API"
---ch_tab_name
+spool captions_form.csv
+SELECT NULL AS "Salesforce Object"
+, NULL AS "Field API Name"
 , :vc_str
 , si.string_value
 --, c.name
