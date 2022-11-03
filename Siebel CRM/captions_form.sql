@@ -1,11 +1,12 @@
 --
 -- 31 Oct 2022 Cheeyoung O
 -- Created to List BC Fields and Table columns
--- with Symbol Strings in a Form Applet (Siebel 8.1.1, Oracle 11.2)
+-- with Symbol Strings on a Form Applet (Siebel 8.1.1, Oracle 11.2.0.3)
 -- This SQL scripts only works for Form Applet
 -- as different SQL statements is needed for List Applet
 -- Set NLS_LANG=AMERICAN_AMERICA.AL32UTF8 before running SQL*Plus
 -- Use SQL*Plus 12.2 or above to use "set markup csv"
+-- if possible, See interoperability Matrix or any known issues between SQL*Plus and 11.2.0.3
 --
 
 -- input(public) variables
@@ -23,9 +24,9 @@ variable vc_repository_id VARCHAR2(15) ;
 
 -- update input variables here
 begin
-  :vc_str := '서비스 주문/일반수리' ;  -- Any string to identify a Form applet in a csv
-  :vc_applet_name := 'Order Entry - Order Form Applet Dashboard' ;
-  :vc_bc_name := 'Order Entry - Orders' ;
+  :vc_str := '고객정보/추가정보' ;  -- Any string to identify a Form applet in a csv
+  :vc_applet_name := 'Account Profile Applet' ;
+  :vc_bc_name := 'Account' ;
 
   :vc_repository_name := 'Siebel Repository' ;
 end ;
@@ -59,23 +60,23 @@ print :vc_repository_id :vc_repository_name
 
 -- execute the query with the private variables
 set markup csv on delimiter ',' quote on
+spool captions_form.csv
 show user
 print :vc_applet_name :vc_bc_name :vc_bc_tab_name
 
-spool captions_form.csv
 SELECT NULL AS "Salesforce Object"
 , NULL AS "Field API Name"
-, :vc_str
-, si.string_value
+, :vc_str 
+, si.string_value AS "Caption"
 --, c.name
 --, c.type
-, c.field_name
-, c.field_type_cd
+, c.field_name AS "BC Field Name"
+--, c.field_type_cd
 --, c.type
 --, c.multi_line
 , nvl2(f.col_name, :vc_bc_tab_name, NULL) AS "DB Table"
-, f.col_name "Column"
-, nvl2(f.col_name, f.join_name, NULL) AS "Join Name"
+, f.col_name "DB Column"
+, nvl2(f.col_name, f.join_name, NULL) AS "Join name"
 --, c.inactive_flg
 --, c.caption
 --, c.field_retrieval_cd
