@@ -13,6 +13,7 @@ variable vc_repository_id VARCHAR2(15) ;
 
 begin
   :vc_applet_name := 'HTW Service Request RMA AR Attachment List Applet' ;
+--  :vc_bc_name := 'Service Request Attachment' ;
   :vc_repository_name := 'Siebel Repository' ;
 end ;
 /
